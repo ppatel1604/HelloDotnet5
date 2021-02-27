@@ -26,11 +26,17 @@ namespace HelloDotnet5
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.Configure<ServiceSettings>(Configuration.GetSection(nameof(ServiceSettings)));
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HelloDotnet5", Version = "v1" });
             });
+
+            services.AddHttpClient<WeatherClient>();
+
+            services.AddSingleton<IWeatherClient, WeatherClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
