@@ -46,7 +46,8 @@ namespace HelloDotnet5
 
             services.AddSingleton<IWeatherClient, WeatherClient>();
 
-            services.AddHealthChecks();
+            services.AddHealthChecks()
+            .AddCheck<ExternalEndpointHealthCheck>("OpenWeather");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
