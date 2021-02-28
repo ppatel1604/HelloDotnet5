@@ -1,14 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Polly;
 
@@ -40,7 +35,8 @@ namespace HelloDotnet5
             {
                 return builder.WaitAndRetryAsync(10, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
             })
-            .AddTransientHttpErrorPolicy(builder => {
+            .AddTransientHttpErrorPolicy(builder =>
+            {
                 return builder.CircuitBreakerAsync(3, TimeSpan.FromSeconds(10));
             });
 

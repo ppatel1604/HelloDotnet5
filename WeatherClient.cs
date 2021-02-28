@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace HelloDotnet5
 {
-    public partial class WeatherClient : IWeatherClient
+    public class WeatherClient : IWeatherClient
     {
         private readonly HttpClient _httpClient;
         private readonly ServiceSettings _serviceSettings;
@@ -22,5 +22,7 @@ namespace HelloDotnet5
             var forecast = await _httpClient.GetFromJsonAsync<Forecast>($"{apiUrl}&q={city}&units=metric");
             return forecast;
         }
+
+
     }
 }

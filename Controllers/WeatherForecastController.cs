@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace HelloDotnet5.Controllers
 {
@@ -28,8 +25,9 @@ namespace HelloDotnet5.Controllers
             var forecast = await _weatherClient.GetCurrentWeatherForCityAsync(city);
 
             var (weather, main, dt) = forecast;
-            
-            return new WeatherForecast{
+
+            return new WeatherForecast
+            {
                 Summary = weather[0].description,
                 TemperatureC = (int)main.temp,
                 Date = DateTimeOffset.FromUnixTimeSeconds(dt).DateTime
